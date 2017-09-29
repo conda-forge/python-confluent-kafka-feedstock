@@ -16,7 +16,7 @@ build:
   number: 0
   # There is no win build for librdkafka at this time.
   # Neither python-avro for py36.
-  skip: True  # [win or py36]
+  skip: True  # [win]
 
 requirements:
   build:
