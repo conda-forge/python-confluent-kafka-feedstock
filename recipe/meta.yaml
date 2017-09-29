@@ -15,7 +15,6 @@ source:
 build:
   number: 0
   # There is no win build for librdkafka at this time.
-  # Neither python-avro for py36.
   skip: True  # [win]
 
 requirements:
@@ -27,14 +26,10 @@ requirements:
   run:
     - python
     - librdkafka 0.9.4
-    - fastavro
-    - requests
-    - python-avro
 
 test:
   imports:
     - confluent_kafka
-    - confluent_kafka.avro
 
   commands:
     - conda inspect linkages {{ pkgname }}  # [unix]
