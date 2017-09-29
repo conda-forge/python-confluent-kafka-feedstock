@@ -1,7 +1,7 @@
 {% set pkgname = "python-confluent-kafka" %}
 {% set name = "confluent-kafka" %}
-{% set version = "0.9.4" %}
-{% set sha256hash = "931bcc3512245ae003c86aa860fb62bbfb4036763a3c2908c50150e412bf0aed" %}
+{% set version = "0.11.0" %}
+{% set sha256hash = "4c34bfe8f823ee3777d93820ec6578365d2bde3cd1302cbd0e44c86b68643667" %}
 
 package:
   name: {{ pkgname|lower }}
