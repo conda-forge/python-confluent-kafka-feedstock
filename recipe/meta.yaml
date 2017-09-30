@@ -1,7 +1,7 @@
 {% set pkgname = "python-confluent-kafka" %}
 {% set name = "confluent-kafka" %}
-{% set version = "0.9.4" %}
-{% set sha256hash = "931bcc3512245ae003c86aa860fb62bbfb4036763a3c2908c50150e412bf0aed" %}
+{% set version = "0.11.0" %}
+{% set sha256hash = "4c34bfe8f823ee3777d93820ec6578365d2bde3cd1302cbd0e44c86b68643667" %}
 
 package:
   name: {{ pkgname|lower }}
@@ -15,8 +15,7 @@ source:
 build:
   number: 0
   # There is no win build for librdkafka at this time.
-  # Neither python-avro for py36.
-  skip: True  # [win or py36]
+  skip: True  # [win]
 
 requirements:
   build:
@@ -27,14 +26,10 @@ requirements:
   run:
     - python
     - librdkafka 0.9.4
-    - fastavro
-    - requests
-    - python-avro
 
 test:
   imports:
     - confluent_kafka
-    - confluent_kafka.avro
 
   commands:
     - conda inspect linkages {{ pkgname }}  # [unix]
@@ -54,3 +49,4 @@ about:
 extra:
   recipe-maintainers:
     - rmax
+    - mrocklin
