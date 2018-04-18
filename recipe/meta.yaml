@@ -1,7 +1,7 @@
 {% set pkgname = "python-confluent-kafka" %}
 {% set name = "confluent-kafka" %}
-{% set version = "0.11.0" %}
-{% set sha256hash = "4c34bfe8f823ee3777d93820ec6578365d2bde3cd1302cbd0e44c86b68643667" %}
+{% set version = "0.11.4" %}
+{% set sha256hash = "90b0fbe4ed85a12d3643309a021b1125f32be5a59d78cac5c4d016defe465876" %}
 
 package:
   name: {{ pkgname|lower }}
@@ -9,7 +9,7 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://github.com/confluentinc/confluent-kafka-python/archive/v{{ version }}.tar.gz
   sha256: {{ sha256hash }}
 
 build:
@@ -22,10 +22,10 @@ requirements:
     - toolchain
     - python
     - setuptools
-    - librdkafka 0.9.4
+    - librdkafka >=0.11.0,<0.12
   run:
     - python
-    - librdkafka 0.9.4
+    - librdkafka >=0.11.0,<0.12
 
 test:
   imports:
@@ -38,7 +38,7 @@ test:
 about:
   home: https://github.com/confluentinc/confluent-kafka-python
   license: Apache 2.0
-  license_file: LICENSE
+  license_file: LICENSE.txt
   summary: "Confluent's Apache Kafka client for Python"
   description: |
     Confluent's Kafka client for Python wraps the librdkafka C library,
