@@ -13,7 +13,7 @@ source:
   sha256: {{ sha256hash }}
 
 build:
-  number: 2
+  number: 1002
   # There is no win build for librdkafka at this time.
   skip: True  # [win]
 
