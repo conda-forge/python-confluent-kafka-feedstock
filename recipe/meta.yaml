@@ -22,10 +22,10 @@ requirements:
   host:
     - python
     - setuptools
-    - librdkafka
+    - librdkafka >={{ version }}
   run:
     - python
-    - librdkafka
+    - librdkafka >={{ version }}
 
 test:
   imports:
@@ -50,3 +50,4 @@ extra:
   recipe-maintainers:
     - rmax
     - mrocklin
+    - mariusvniekerk
