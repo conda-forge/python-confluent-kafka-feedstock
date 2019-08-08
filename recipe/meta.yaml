@@ -1,6 +1,6 @@
 {% set pkgname = "python-confluent-kafka" %}
 {% set name = "confluent-kafka" %}
-{% set version = "1.0.1" %}
+{% set version = "1.1.0" %}
 
 package:
   name: {{ pkgname|lower }}
@@ -9,7 +9,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 6f9a99de81028fa687499f2f335374b0ee2366a970bc0664637ab346a1b77a11
+  sha256: c8dee478a46a9352224fce1d12756cff6cf50e2684121a118141c7908ae9ed3e
 
 build:
   number: 0
