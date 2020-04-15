@@ -12,7 +12,7 @@ source:
   sha256: 4025ccddbc79443a4e2342de0d770f669558eb737fca2e7851558cd45f78ef78
 
 build:
-  number: 0
+  number: 1
   # There is no win build for librdkafka at this time.
   skip: True  # [win]
 
