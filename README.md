@@ -3,7 +3,7 @@ About python-confluent-kafka
 
 Home: https://github.com/confluentinc/confluent-kafka-python
 
-Package license: Apache 2.0
+Package license: Apache-2.0
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/python-confluent-kafka-feedstock/blob/master/LICENSE.txt)
 
