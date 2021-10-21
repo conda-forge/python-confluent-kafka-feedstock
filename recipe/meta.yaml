@@ -13,7 +13,12 @@ source:
 
 build:
   number: 1
-  # There is no win build for librdkafka at this time.
+  script: 
+    - export CFLAGS="${CFLAGS} -I${PREFIX}/include"  # [unix]
+    - export LDFLAGS="${LDFLAGS} -I${PREFIX}/lib"    # [unix]
+    - set CFLAGS="%CFLAGS% -I%LIBRARY_INC%"          # [win]
+    - set LDFLAGS="%LDFLAGS% -I%LIBRARY_LIB%"        # [win]
+    - {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
@@ -31,8 +36,6 @@ requirements:
 test:
   imports:
     - confluent_kafka
-
-  commands:
 
 about:
   home: https://github.com/confluentinc/confluent-kafka-python
