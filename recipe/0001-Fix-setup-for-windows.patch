@@ -1,136 +1,17 @@
-From e09267e423b904d656c77b96a6e57bfd0fe97c59 Mon Sep 17 00:00:00 2001
+From 803d24d3863156d5a76c46ee0ec06fa95626988b Mon Sep 17 00:00:00 2001
 From: Marcelo Duarte Trevisani <marceloduartetrevisani@gmail.com>
-Date: Thu, 21 Oct 2021 11:59:02 +0100
+Date: Thu, 21 Oct 2021 12:38:40 +0100
 Subject: [PATCH] Fix setup for windows
 
 ---
- 0001-Fix-setup-for-wdinwos.patch | 29 +++++++++++++
- 0001-Fix-setup-for-windows.patch | 74 ++++++++++++++++++++++++++++++++
- setup.py                         | 17 +++-----
- 3 files changed, 109 insertions(+), 11 deletions(-)
- create mode 100644 0001-Fix-setup-for-wdinwos.patch
- create mode 100644 0001-Fix-setup-for-windows.patch
+ setup.py | 16 ++++------------
+ 1 file changed, 4 insertions(+), 12 deletions(-)
 
-diff --git a/0001-Fix-setup-for-wdinwos.patch b/0001-Fix-setup-for-wdinwos.patch
-new file mode 100644
-index 0000000..b77226b
---- /dev/null
-+++ b/0001-Fix-setup-for-wdinwos.patch
-@@ -0,0 +1,29 @@
-+From 49e57e5296f4dd73f912e459f4dbf16b0cf64fa2 Mon Sep 17 00:00:00 2001
-+From: Marcelo Duarte Trevisani <marceloduartetrevisani@gmail.com>
-+Date: Thu, 21 Oct 2021 11:59:02 +0100
-+Subject: [PATCH] Fix setup for wdinwos
-+
-+---
-+ setup.py | 6 ++----
-+ 1 file changed, 2 insertions(+), 4 deletions(-)
-+
-+diff --git a/setup.py b/setup.py
-+index 52e6fc3..4060ab6 100755
-+--- a/setup.py
-++++ b/setup.py
-+@@ -42,10 +42,8 @@ PROTO_REQUIRES = ['protobuf'] + SCHEMA_REGISTRY_REQUIRES
-+ 
-+ # On Un*x the library is linked as -lrdkafka,
-+ # while on windows we need the full librdkafka name.
-+-if platform.system() == 'Windows':
-+-    librdkafka_libname = 'librdkafka'
-+-else:
-+-    librdkafka_libname = 'rdkafka'
-++
-++librdkafka_libname = 'rdkafka'
-+ 
-+ module = Extension('confluent_kafka.cimpl',
-+                    libraries=[librdkafka_libname],
-+-- 
-+2.30.2
-+
-diff --git a/0001-Fix-setup-for-windows.patch b/0001-Fix-setup-for-windows.patch
-new file mode 100644
-index 0000000..755853e
---- /dev/null
-+++ b/0001-Fix-setup-for-windows.patch
-@@ -0,0 +1,74 @@
-+From 8886ebbec7028d99e586600609070f439ecba3e1 Mon Sep 17 00:00:00 2001
-+From: Marcelo Duarte Trevisani <marceloduartetrevisani@gmail.com>
-+Date: Thu, 21 Oct 2021 11:59:02 +0100
-+Subject: [PATCH] Fix setup for windows
-+
-+---
-+ 0001-Fix-setup-for-wdinwos.patch | 29 +++++++++++++++++++++++++++++
-+ setup.py                         |  7 ++-----
-+ 2 files changed, 31 insertions(+), 5 deletions(-)
-+ create mode 100644 0001-Fix-setup-for-wdinwos.patch
-+
-+diff --git a/0001-Fix-setup-for-wdinwos.patch b/0001-Fix-setup-for-wdinwos.patch
-+new file mode 100644
-+index 0000000..b77226b
-+--- /dev/null
-++++ b/0001-Fix-setup-for-wdinwos.patch
-+@@ -0,0 +1,29 @@
-++From 49e57e5296f4dd73f912e459f4dbf16b0cf64fa2 Mon Sep 17 00:00:00 2001
-++From: Marcelo Duarte Trevisani <marceloduartetrevisani@gmail.com>
-++Date: Thu, 21 Oct 2021 11:59:02 +0100
-++Subject: [PATCH] Fix setup for wdinwos
-++
-++---
-++ setup.py | 6 ++----
-++ 1 file changed, 2 insertions(+), 4 deletions(-)
-++
-++diff --git a/setup.py b/setup.py
-++index 52e6fc3..4060ab6 100755
-++--- a/setup.py
-+++++ b/setup.py
-++@@ -42,10 +42,8 @@ PROTO_REQUIRES = ['protobuf'] + SCHEMA_REGISTRY_REQUIRES
-++ 
-++ # On Un*x the library is linked as -lrdkafka,
-++ # while on windows we need the full librdkafka name.
-++-if platform.system() == 'Windows':
-++-    librdkafka_libname = 'librdkafka'
-++-else:
-++-    librdkafka_libname = 'rdkafka'
-+++
-+++librdkafka_libname = 'rdkafka'
-++ 
-++ module = Extension('confluent_kafka.cimpl',
-++                    libraries=[librdkafka_libname],
-++-- 
-++2.30.2
-++
-+diff --git a/setup.py b/setup.py
-+index 52e6fc3..305770a 100755
-+--- a/setup.py
-++++ b/setup.py
-+@@ -42,10 +42,8 @@ PROTO_REQUIRES = ['protobuf'] + SCHEMA_REGISTRY_REQUIRES
-+ 
-+ # On Un*x the library is linked as -lrdkafka,
-+ # while on windows we need the full librdkafka name.
-+-if platform.system() == 'Windows':
-+-    librdkafka_libname = 'librdkafka'
-+-else:
-+-    librdkafka_libname = 'rdkafka'
-++
-++librdkafka_libname = 'rdkafka'
-+ 
-+ module = Extension('confluent_kafka.cimpl',
-+                    libraries=[librdkafka_libname],
-+@@ -89,7 +87,6 @@ setup(name='confluent-kafka',
-+       ext_modules=[module],
-+       packages=find_packages('src'),
-+       package_dir={'': 'src'},
-+-      data_files=[('', [os.path.join(work_dir, 'LICENSE.txt')])],
-+       install_requires=INSTALL_REQUIRES,
-+       classifiers=trove_classifiers,
-+       extras_require={
-+-- 
-+2.30.2
-+
 diff --git a/setup.py b/setup.py
-index 52e6fc3..e3d0726 100755
+index 9e1d337..783b4fe 100755
 --- a/setup.py
 +++ b/setup.py
-@@ -1,15 +1,12 @@
+@@ -1,13 +1,10 @@
 -#!/usr/bin/env python
 -
  import os
@@ -141,28 +22,26 @@ index 52e6fc3..e3d0726 100755
 -work_dir = os.path.dirname(os.path.realpath(__file__))
 -mod_dir = os.path.join(work_dir, 'src', 'confluent_kafka')
 -ext_dir = os.path.join(mod_dir, 'src')
- 
--with open(os.path.join(work_dir, 'README.md'), encoding='utf-8') as f:
-+ext_dir = 'src'
 +
-+with open('README.md', encoding='utf-8') as f:
-     long_description = f.read()
++ext_dir = os.path.join('src', 'confluent_kafka', 'src')
  
  INSTALL_REQUIRES = [
-@@ -42,10 +39,8 @@ PROTO_REQUIRES = ['protobuf'] + SCHEMA_REGISTRY_REQUIRES
+     'futures;python_version<"3.2"',
+@@ -37,12 +34,7 @@ JSON_REQUIRES = ['pyrsistent==0.16.1;python_version<"3.0"',
  
- # On Un*x the library is linked as -lrdkafka,
- # while on windows we need the full librdkafka name.
+ PROTO_REQUIRES = ['protobuf'] + SCHEMA_REGISTRY_REQUIRES
+ 
+-# On Un*x the library is linked as -lrdkafka,
+-# while on windows we need the full librdkafka name.
 -if platform.system() == 'Windows':
 -    librdkafka_libname = 'librdkafka'
 -else:
 -    librdkafka_libname = 'rdkafka'
-+
 +librdkafka_libname = 'rdkafka'
  
  module = Extension('confluent_kafka.cimpl',
                     libraries=[librdkafka_libname],
-@@ -89,7 +84,7 @@ setup(name='confluent-kafka',
+@@ -84,7 +76,7 @@ setup(name='confluent-kafka',
        ext_modules=[module],
        packages=find_packages('src'),
        package_dir={'': 'src'},
