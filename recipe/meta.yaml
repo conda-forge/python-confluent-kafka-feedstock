@@ -8,13 +8,19 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 80e01b4791513c27eded8517af847530dfdf04c43d99ff132ed9c3085933b75b
+  url: https://github.com/confluentinc/confluent-kafka-python/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 7ae8600cf4a173eca36721d138349a05ab356532fac0bb57ad9d7e451eef8aed
+  patches:
+    - 0001-Fix-setup-for-windows.patch
 
 build:
-  number: 0
-  # There is no win build for librdkafka at this time.
-  skip: true  # [win]
+  number: 1
+  script: 
+    - export CFLAGS="${CFLAGS} -I${PREFIX}/include"  # [unix]
+    - export LDFLAGS="${LDFLAGS} -I${PREFIX}/lib"    # [unix]
+    - set CFLAGS="%CFLAGS% /I%LIBRARY_INC%"          # [win]
+    - set LDFLAGS="%LDFLAGS% /I%LIBRARY_LIB%"        # [win]
+    - {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
@@ -24,6 +30,7 @@ requirements:
   host:
     - python
     - setuptools
+    - pip
     - librdkafka >={{ version }}
   run:
     - python
@@ -32,8 +39,6 @@ requirements:
 test:
   imports:
     - confluent_kafka
-
-  commands:
 
 about:
   home: https://github.com/confluentinc/confluent-kafka-python
