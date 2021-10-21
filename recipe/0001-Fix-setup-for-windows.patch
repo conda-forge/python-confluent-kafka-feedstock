@@ -1,0 +1,28 @@
+From 49e57e5296f4dd73f912e459f4dbf16b0cf64fa2 Mon Sep 17 00:00:00 2001
+From: Marcelo Duarte Trevisani <marceloduartetrevisani@gmail.com>
+Date: Thu, 21 Oct 2021 11:59:02 +0100
+Subject: [PATCH] Fix setup for windows
+
+---
+ setup.py | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index 52e6fc3..4060ab6 100755
+--- a/setup.py
++++ b/setup.py
+@@ -42,10 +42,8 @@ PROTO_REQUIRES = ['protobuf'] + SCHEMA_REGISTRY_REQUIRES
+ 
+ # On Un*x the library is linked as -lrdkafka,
+ # while on windows we need the full librdkafka name.
+-if platform.system() == 'Windows':
+-    librdkafka_libname = 'librdkafka'
+-else:
+-    librdkafka_libname = 'rdkafka'
++
++librdkafka_libname = 'rdkafka'
+ 
+ module = Extension('confluent_kafka.cimpl',
+                    libraries=[librdkafka_libname],
+-- 
+2.30.2
