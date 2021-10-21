@@ -16,8 +16,8 @@ build:
   script: 
     - export CFLAGS="${CFLAGS} -I${PREFIX}/include"  # [unix]
     - export LDFLAGS="${LDFLAGS} -I${PREFIX}/lib"    # [unix]
-    - set CFLAGS="%CFLAGS% -I%LIBRARY_INC%"          # [win]
-    - set LDFLAGS="%LDFLAGS% -I%LIBRARY_LIB%"        # [win]
+    - set CFLAGS="%CFLAGS% /I%LIBRARY_INC%"          # [win]
+    - set LDFLAGS="%LDFLAGS% /I%LIBRARY_LIB%"        # [win]
     - {{ PYTHON }} -m pip install . -vv
 
 requirements:
