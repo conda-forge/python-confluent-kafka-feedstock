@@ -1,63 +1,28 @@
-From 3344a2c5f1d501c16df3f7a350d96f4a23eaa70d Mon Sep 17 00:00:00 2001
-From: Marcelo Duarte Trevisani <marceloduartetrevisani@gmail.com>
-Date: Thu, 21 Oct 2021 13:36:27 +0100
+From 330519c595391ae4f69a68ebb5e63cbde84b8d5a Mon Sep 17 00:00:00 2001
+From: "duncan.macleod" <duncan.macleod@ligo.org>
+Date: Fri, 6 May 2022 16:41:34 +0100
 Subject: [PATCH] Fix setup for windows
 
 ---
- setup.py | 18 +++++-------------
- 1 file changed, 5 insertions(+), 13 deletions(-)
+ setup.py | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
 diff --git a/setup.py b/setup.py
-index 9e1d337..0602b91 100755
+index 295c5cd..f0b4d97 100755
 --- a/setup.py
 +++ b/setup.py
-@@ -1,13 +1,10 @@
--#!/usr/bin/env python
--
- import os
- from setuptools import setup, find_packages
- from distutils.core import Extension
- import platform
+@@ -42,10 +42,7 @@ PROTO_REQUIRES = ['protobuf'] + SCHEMA_REGISTRY_REQUIRES
  
--work_dir = os.path.dirname(os.path.realpath(__file__))
--mod_dir = os.path.join(work_dir, 'src', 'confluent_kafka')
--ext_dir = os.path.join(mod_dir, 'src')
-+
-+ext_dir = os.path.join('src', 'confluent_kafka', 'src')
- 
- INSTALL_REQUIRES = [
-     'futures;python_version<"3.2"',
-@@ -37,12 +34,8 @@ JSON_REQUIRES = ['pyrsistent==0.16.1;python_version<"3.0"',
- 
- PROTO_REQUIRES = ['protobuf'] + SCHEMA_REGISTRY_REQUIRES
- 
--# On Un*x the library is linked as -lrdkafka,
--# while on windows we need the full librdkafka name.
+ # On Un*x the library is linked as -lrdkafka,
+ # while on windows we need the full librdkafka name.
 -if platform.system() == 'Windows':
 -    librdkafka_libname = 'librdkafka'
 -else:
 -    librdkafka_libname = 'rdkafka'
-+
 +librdkafka_libname = 'rdkafka'
  
  module = Extension('confluent_kafka.cimpl',
                     libraries=[librdkafka_libname],
-@@ -55,7 +48,7 @@ module = Extension('confluent_kafka.cimpl',
- 
- 
- def get_install_requirements(path):
--    content = open(os.path.join(os.path.dirname(__file__), path)).read()
-+    content = open(path).read()
-     return [
-         req
-         for req in content.split("\n")
-@@ -84,7 +77,6 @@ setup(name='confluent-kafka',
-       ext_modules=[module],
-       packages=find_packages('src'),
-       package_dir={'': 'src'},
--      data_files=[('', [os.path.join(work_dir, 'LICENSE.txt')])],
-       install_requires=INSTALL_REQUIRES,
-       classifiers=trove_classifiers,
-       extras_require={
 -- 
-2.30.2
+2.35.3
+
