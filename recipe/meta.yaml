@@ -4,7 +4,7 @@
 
 package:
   name: {{ pkgname|lower }}
-  version: {{ version }}
+  version: {{ version|replace("-post",".post") }}
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
@@ -31,10 +31,10 @@ requirements:
     - python
     - setuptools
     - pip
-    - librdkafka >={{ version }}
+    - librdkafka >={{ version|replace("-post",".post") }}
   run:
     - python
-    - librdkafka >={{ version }}
+    - librdkafka >={{ version|replace("-post",".post") }}
 
 test:
   imports:
