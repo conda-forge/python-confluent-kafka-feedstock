@@ -8,8 +8,8 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 1587a279603f19aa3a4ad3c861495dc3519601bd47152587d6a854172bbef3a7
+  url: https://github.com/confluentinc/confluent-kafka-python/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: c7a7e454a3d9e182b856f6300ae604f8b887325a120f51aedd0390c82be2e4b0
   patches:
     - 0001-Fix-setup-for-windows.patch  # [win]
 
