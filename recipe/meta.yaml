@@ -14,7 +14,7 @@ source:
     - 0001-Fix-setup-for-windows.patch  # [win]
 
 build:
-  number: 0
+  number: 1
   script:
     - export CFLAGS="${CFLAGS} -I${PREFIX}/include"  # [unix]
     - export LDFLAGS="${LDFLAGS} -I${PREFIX}/lib"    # [unix]
