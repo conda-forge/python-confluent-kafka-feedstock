@@ -16,7 +16,7 @@ source:
 build:
   # This package does not support PyPy.
   # See https://github.com/confluentinc/confluent-kafka-python/issues/1747#issuecomment-2112004625
-  skip: True  # [python_impl == 'pypy']
+  skip: true  # [python_impl == 'pypy']
   number: 0
   script:
     - export CFLAGS="${CFLAGS} -I${PREFIX}/include"  # [unix]
