@@ -47,7 +47,7 @@ test:
 about:
   home: https://github.com/confluentinc/confluent-kafka-python
   license: Apache-2.0
-  license_file: LICENSE.txt
+  license_file: LICENSE
   summary: Confluent's Apache Kafka client for Python
   description: |
     Confluent's Kafka client for Python wraps the librdkafka C library,
