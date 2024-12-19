@@ -1,6 +1,6 @@
 {% set pkgname = "python-confluent-kafka" %}
 {% set name = "confluent-kafka" %}
-{% set version = "2.6.1" %}
+{% set version = "2.6.2-2" %}
 
 package:
   name: {{ pkgname|lower }}
@@ -9,7 +9,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/confluentinc/confluent-kafka-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 2f2b70c38f5eb07a3fb22721ba4ffa19bac160dfd70469de47f550d111d377cd
+  sha256: 683e4ab69d5ec1746198625f49006cf199d248e21752632a8ed4868653b3787d
   patches:
     - 0001-Fix-setup-for-windows.patch  # [win]
 
