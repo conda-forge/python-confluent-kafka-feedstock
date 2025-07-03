@@ -378,6 +378,3 @@ Feedstock Maintainers
 * [@mrocklin](https://github.com/mrocklin/)
 * [@rmax](https://github.com/rmax/)
 
-
-<!-- dummy commit to enable rerendering -->
-
