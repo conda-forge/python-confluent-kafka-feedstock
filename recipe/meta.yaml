@@ -1,7 +1,6 @@
 {% set pkgname = "python-confluent-kafka" %}
 {% set name = "confluent-kafka" %}
 {% set version = "2.13.0" %}
-{% set librdkafka_version = "2.12.1" %}
 
 package:
   name: {{ pkgname|lower }}
@@ -36,10 +35,10 @@ requirements:
     - python
     - setuptools
     - pip
-    - librdkafka >={{ librdkafka_version }}
+    - librdkafka >={{ version }}
   run:
     - python
-    - librdkafka >={{ librdkafka_version }}
+    - librdkafka >={{ version }}
 
 test:
   imports:
