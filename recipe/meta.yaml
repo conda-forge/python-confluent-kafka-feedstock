@@ -1,7 +1,6 @@
 {% set pkgname = "python-confluent-kafka" %}
 {% set name = "confluent-kafka" %}
-{% set version = "2.12.2" %}
-{% set librdkafka_version = "2.12.1" %}
+{% set version = "2.13.0" %}
 
 package:
   name: {{ pkgname|lower }}
@@ -10,7 +9,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/confluentinc/confluent-kafka-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 81f961ddc9e7db02a9329b8cddf6ec79a10103b0d8897011b1dbad284177b896
+  sha256: 8301c9d5ea52213fa48585c241d1b3dd937e1c60631583adda835674e10a334a
   patches:
     - 0001-Fix-setup-for-windows.patch  # [win]
 
@@ -36,10 +35,10 @@ requirements:
     - python
     - setuptools
     - pip
-    - librdkafka >={{ librdkafka_version }}
+    - librdkafka >={{ version }}
   run:
     - python
-    - librdkafka >={{ librdkafka_version }}
+    - librdkafka >={{ version }}
 
 test:
   imports:
