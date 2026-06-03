@@ -1,6 +1,6 @@
 {% set pkgname = "python-confluent-kafka" %}
 {% set name = "confluent-kafka" %}
-{% set version = "2.14.0" %}
+{% set version = "2.14.2" %}
 
 package:
   name: {{ pkgname|lower }}
@@ -9,7 +9,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/confluentinc/confluent-kafka-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: a9e87118f0076e4ed505121c27e4bc87fb95f524b4b2aead5b79ba36a5855e1d
+  sha256: ecb337684adf26a78fd04eb5ef294d49325af6929a3a856d4981029875baaf13
   patches:
     - 0001-Fix-setup-for-windows.patch  # [win]
 
@@ -17,7 +17,7 @@ build:
   # This package does not support PyPy.
   # See https://github.com/confluentinc/confluent-kafka-python/issues/1747#issuecomment-2112004625
   skip: true  # [python_impl == 'pypy']
-  number: 1
+  number: 0
   script:
     - export CFLAGS="${CFLAGS} -I${PREFIX}/include"  # [unix]
     - export LDFLAGS="${LDFLAGS} -I${PREFIX}/lib"    # [unix]
