@@ -7,14 +7,13 @@ Home: https://github.com/confluentinc/confluent-kafka-python
 
 Package license: Apache-2.0
 
-Summary: Confluent's Apache Kafka client for Python
+Summary: Confluent's Python client for Apache Kafka
 
 Documentation: http://docs.confluent.io/current/clients/confluent-kafka-python/index.html
 
 Confluent's Kafka client for Python wraps the librdkafka C library,
 providing full Kafka protocol support with great performance and
 reliability.
-
 
 Current build status
 ====================
@@ -257,4 +256,6 @@ Feedstock Maintainers
 * [@mariusvniekerk](https://github.com/mariusvniekerk/)
 * [@mrocklin](https://github.com/mrocklin/)
 * [@rmax](https://github.com/rmax/)
+* [@rxm7706](https://github.com/rxm7706/)
+* [@timkpaine](https://github.com/timkpaine/)
 
