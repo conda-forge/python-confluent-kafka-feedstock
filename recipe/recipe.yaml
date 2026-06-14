@@ -1,0 +1,82 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+schema_version: 1
+
+context:
+  version: "2.14.2"
+
+package:
+  name: python-confluent-kafka
+  version: ${{ version }}
+
+source:
+  url: https://github.com/confluentinc/confluent-kafka-python/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: ecb337684adf26a78fd04eb5ef294d49325af6929a3a856d4981029875baaf13
+  patches:
+    - if: win
+      then: 0001-Fix-setup-for-windows.patch
+
+build:
+  number: 0
+  # Upstream does not support PyPy.
+  # https://github.com/confluentinc/confluent-kafka-python/issues/1747#issuecomment-2112004625
+  skip: match(python_impl, "pypy")
+  script:
+    - if: unix
+      then: |
+        export CFLAGS="${CFLAGS} -I${PREFIX}/include"
+        export LDFLAGS="${LDFLAGS} -I${PREFIX}/lib"
+        ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+      else: |
+        set "CFLAGS=%CFLAGS% /I%LIBRARY_INC%"
+        set "LDFLAGS=%LDFLAGS% /I%LIBRARY_LIB%"
+        %PYTHON% -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler("c") }}
+    - ${{ stdlib("c") }}
+    - if: build_platform != target_platform
+      then:
+        - python
+        - cross-python_${{ target_platform }}
+        - crossenv
+  host:
+    - python
+    - pip
+    - setuptools >=62
+    - wheel
+    - librdkafka >=${{ version }}
+  run:
+    - python
+    - librdkafka >=${{ version }}
+    # Upstream requirements/requirements.txt declares
+    # `typing-extensions ; python_version < "3.11"`. The runtime overhead on
+    # 3.11+ is negligible, so we ship it unconditionally rather than gating
+    # the marker into a conda-forge selector.
+    - typing_extensions
+
+tests:
+  - python:
+      imports:
+        - confluent_kafka
+      pip_check: true
+
+about:
+  summary: Confluent's Python client for Apache Kafka
+  description: |
+    Confluent's Kafka client for Python wraps the librdkafka C library,
+    providing full Kafka protocol support with great performance and
+    reliability.
+  license: Apache-2.0
+  license_file: LICENSE
+  homepage: https://github.com/confluentinc/confluent-kafka-python
+  documentation: http://docs.confluent.io/current/clients/confluent-kafka-python/index.html
+
+extra:
+  recipe-maintainers:
+    - lpsinger
+    - mariusvniekerk
+    - mrocklin
+    - rmax
+    - rxm7706
+    - timkpaine
