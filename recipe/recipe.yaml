@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "2.16.0"
+  version: "2.16.1"
 
 package:
   name: python-confluent-kafka
@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/c/confluent-kafka/confluent_kafka-${{ version }}.tar.gz
-  sha256: 8268b8763a0c0503a99a55a9cac0132ed010932135d4222f67e2c804d1597508
+  sha256: ec1474347615b9dd1bd0e269d37e31fa442782e67c4942661751e81b09d9f0c8
   patches:
     - if: win
       then: 0001-Fix-setup-for-windows.patch
