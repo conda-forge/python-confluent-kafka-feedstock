@@ -15,7 +15,7 @@ source:
       then: 0001-Fix-setup-for-windows.patch
 
 build:
-  number: 0
+  number: 1
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
