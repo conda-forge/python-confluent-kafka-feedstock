@@ -2,6 +2,8 @@ schema_version: 1
 
 context:
   version: "2.16.2"
+  # This is usually, but not always,the same as ${{ version }}.
+  librdkafka_version: "2.16.0"
 
 package:
   name: python-confluent-kafka
@@ -31,10 +33,10 @@ requirements:
     - pip
     - setuptools >=62
     - wheel
-    - librdkafka >=${{ version }}
+    - librdkafka >=${{ librdkafka_version }}
   run:
     - python
-    - librdkafka >=${{ version }}
+    - librdkafka >=${{ librdkafka_version }}
 
 tests:
   - python:
