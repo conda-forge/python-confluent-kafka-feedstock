@@ -1,7 +1,9 @@
 schema_version: 1
 
 context:
-  version: "2.16.0"
+  version: "2.16.2"
+  # This is usually, but not always,the same as ${{ version }}.
+  librdkafka_version: "2.16.0"
 
 package:
   name: python-confluent-kafka
@@ -9,13 +11,13 @@ package:
 
 source:
   url: https://pypi.org/packages/source/c/confluent-kafka/confluent_kafka-${{ version }}.tar.gz
-  sha256: 8268b8763a0c0503a99a55a9cac0132ed010932135d4222f67e2c804d1597508
+  sha256: 18e15d76d1e43fb80c4574dc0ecb7aa5f7e6cfb72de6ef8340ca02f81fbd7b89
   patches:
     - if: win
       then: 0001-Fix-setup-for-windows.patch
 
 build:
-  number: 1
+  number: 0
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
@@ -31,10 +33,10 @@ requirements:
     - pip
     - setuptools >=62
     - wheel
-    - librdkafka >=${{ version }}
+    - librdkafka >=${{ librdkafka_version }}
   run:
     - python
-    - librdkafka >=${{ version }}
+    - librdkafka >=${{ librdkafka_version }}
 
 tests:
   - python:
